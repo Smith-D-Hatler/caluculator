@@ -8,15 +8,28 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController (){
+    StateMachine *statemachine;
+}
 
 @end
 
 @implementation ViewController
 
+@synthesize model;
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    model = [[StateMachine alloc]init];
+    model.x = 0;
+    model.y = 0;
+    model.keisan = 0;
+    model.shou = 0;
+    model.W = 0;
+    model.s = 0;
+    model.n = 1;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -26,270 +39,219 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-double x=0;
-int answer;
-double y=0;
-int keisan=0;
-double Z=0;
-int shou=0;
-double W=0;
-double s=0;
-int n=1;
-
 - (void)Button:(int)number{
-    switch (keisan){
+    switch (model.keisan){
         case 0:
-            
-            if (shou == 0){
-                x=x*10+number;
-                [[self window] setText:[NSString stringWithFormat:@"%g",x]];
+            if (model.shou == 0){
+                model.x = model.x * 10 + number;
+                [self windowSetText:2];
+                
             }
             else
             {
+                model.W = number * pow(10,(-model.n));
+                model.s = model.W + model.x;
+                [self windowSetText:4];
                 
-                W=number*pow(10,(-n));
-                
-                s=W+x;
-                
-                [[self window] setText:[NSString stringWithFormat:@"%g",s]];
-                x=s;
-                n=n+1;
-                
+                model.x = model.s;
+                model.n = model.n + 1;
             }
             break;
             
         case 1:
             
-            if (shou == 0){
-                y=y*10+number;
-                [[self window] setText:[NSString stringWithFormat:@"%g",y]];
+            if (model.shou == 0){
+                model.y = model.y * 10 + number;
+                [self windowSetText:3];
+                
             }
             else
             {
-                W=number*pow(10,(-n));
-                s=W+y;
-                [[self window] setText:[NSString stringWithFormat:@"%g",s]];
-                y=s;
-                n=n+1;
+                model.W = number * pow(10,(-model.n));
+                model.s = model.W + model.y;
+                [self windowSetText:4];
+                
+                model.y = model.s;
+                model.n = model.n+1;
             }
             break;
     }
 }
 
-- (IBAction)zero:(id)sender {
-    
-    [self Button:0];
-    
-}
-
-- (IBAction)period:(id)sender {
-    shou=1;
-    
-}
 
 - (IBAction)equal:(id)sender {
+    [model calc];
+    [self windowSetText:2];
     
-    switch (answer){
-        case 1:
+}
+
+
+- (void)windowSetText:(int)selecter{
+    switch (selecter) {
             
-            Z=x+y;
-            [[self window] setText:[NSString stringWithFormat:@"%g",Z]];
-            x=Z;
-            y=0;
-            keisan=1;
+        case 1:
+            [[self window] setText:[NSString stringWithFormat:@"%d",0]];
             break;
             
         case 2:
-            Z=x-y;
-            [[self window] setText:[NSString stringWithFormat:@"%g",Z]];
-            x=Z;
-            y=0;
-            keisan=1;
+            [[self window] setText:[NSString stringWithFormat:@"%g",model.x]];
             break;
             
-            
         case 3:
-            Z=x*y;
-            [[self window] setText:[NSString stringWithFormat:@"%g",Z]];
-            x=Z;
-            y=0;
-            keisan=1;
+            [[self window] setText:[NSString stringWithFormat:@"%g",model.y]];
             break;
             
         case 4:
-            Z=x/y;
-            [[self window] setText:[NSString stringWithFormat:@"%g",Z]];
-            x=Z;
-            y=0;
-            keisan=1;
+            [[self window] setText:[NSString stringWithFormat:@"%g",model.s]];
             break;
-            
     }
-    
+}
+
+/* Statemachine.mに移動した
+ - (void)calc{
+ switch (model.answer){
+ case 1:
+ model.x = model.x + model.y;
+ break;
+ 
+ case 2:
+ model.x = model.x - model.y;
+ break;
+ 
+ case 3:
+ model.x = model.x * model.y;
+ break;
+ 
+ case 4:
+ model.x = model.x / model.y;
+ break;
+ }
+ model.y = 0;
+ model.keisan = 0;
+ }
+ */
+
+- (IBAction)period:(id)sender {
+    model.shou = 1;
+}
+
+- (IBAction)zero:(id)sender {
+    [self Button:0];
 }
 
 - (IBAction)one:(id)sender {
-    
     [self Button:1];
-    
 }
 
 - (IBAction)two:(id)sender {
-    
     [self Button:2];
-    
 }
 
 - (IBAction)three:(id)sender {
-    
     [self Button:3];
-    
 }
 
 - (IBAction)four:(id)sender {
-    
     [self Button:4];
-    
 }
 
 - (IBAction)five:(id)sender {
-    
     [self Button:5];
-    
 }
 
-
 - (IBAction)six:(id)sender {
-    
     [self Button:6];
-    
 }
 
 - (IBAction)seven:(id)sender {
-    
-    
     [self Button:7];
-    
 }
 
 - (IBAction)eight:(id)sender {
-    
     [self Button:8];
-    
 }
 
 - (IBAction)nine:(id)sender {
-    
     [self Button:9];
-    
 }
+
+
 
 - (IBAction)plus:(id)sender {
+    //[model math:1]
     
-    if (keisan==0){
-        
-        keisan=1;
-        shou=0;
-        n=1;
-        [[self window] setText:[NSString stringWithFormat:@"%d",0]];
-        answer=1;
-        
+    if (model.keisan == 0){
+        [self windowSetText:1];
     }else{
-        keisan=1;
-        shou=0;
-        n=1;
-        answer=1;
-        Z=x+y;
-        [[self window] setText:[NSString stringWithFormat:@"%g",Z]];
-        x=Z;
-        y=0;
+        [model calc];
+        [self windowSetText:2];
     }
-    
+    [model math:1];
 }
-
 
 - (IBAction)minus:(id)sender {
-    if (keisan==0){
-        keisan=1;
-        shou=0;
-        n=1;
-        [[self window] setText:[NSString stringWithFormat:@"%d",0]];
-        answer=2;
+    
+    
+    if (model.keisan == 0){
+        [self windowSetText:1];
     }else{
-        keisan=1;
-        shou=0;
-        n=1;
-        answer=2;
-        Z=x-y;
-        [[self window] setText:[NSString stringWithFormat:@"%g",Z]];
-        x=Z;
-        y=0;
+        [model calc];
         
-        
+        [self windowSetText:2];
     }
-    
+    [model math:2];
 }
-
-- (IBAction)clear:(id)sender {
-    
-    
-    x=0;
-    y=0;
-    Z=0;
-    W=0;
-    s=0;
-    n=1;
-    shou=0;
-    keisan=0;
-    [[self window] setText:[NSString stringWithFormat:@"%d",0]];
-    answer=0;
-    
-}
-
 
 - (IBAction)multiply:(id)sender {
-    if (keisan==0){
-        keisan=1;
-        shou=0;
-        n=1;
-        [[self window] setText:[NSString stringWithFormat:@"%d",0]];
-        answer=3;
-    }else{
-        keisan=1;
-        shou=0;
-        n=1;
-        answer=3;
-        Z=x*y;
-        [[self window] setText:[NSString stringWithFormat:@"%g",Z]];
-        x=Z;
-        y=0;
+    if (model.keisan == 0){
+        [self windowSetText:1];
         
+    }else{
+        [model calc];
+        [self windowSetText:2];
     }
+    
+    [model math:3];
     
 }
 
 - (IBAction)divide:(id)sender {
-    if (keisan==0){
-        keisan=1;
-        shou=0;
-        n=1;
-        [[self window] setText:[NSString stringWithFormat:@"%d",0]];
-        answer=4;
+    if (model.keisan == 0){
+        
+        [self windowSetText:1];
         
     }else{
-        keisan=1;
-        shou=0;
-        n=1;
-        answer=4;
-        Z=x/y;
-        [[self window] setText:[NSString stringWithFormat:@"%g",Z]];
-        x=Z;
-        y=0;
+        [model calc];
+        [self windowSetText:2];
     }
     
+    [model math:4];
 }
+/*　statemschine.mに移動した
+ - (void)math:(int)kai{
+ if (model.keisan != 0){
+ model.y = 0;
+ }
+ model.keisan = 1;
+ model.shou = 0;
+ model.n = 1;
+ model.answer = kai;
+ }
+ */
 
+- (IBAction)clear:(id)sender {
+    
+    model.x = 0;
+    model.y = 0;
+    model.W = 0;
+    model.s = 0;
+    model.n = 1;
+    model.shou = 0;
+    model.keisan = 0;
+    model.answer = 0;
+    [self windowSetText:1];
+    
+}
 
 @end
 

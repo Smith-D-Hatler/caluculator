@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StateMachine.h"
 
-@interface ViewController : UIViewController
-{
-   // int x;
-    
+@interface ViewController : UIViewController{
     
 }
+@property StateMachine* model;
 
 - (IBAction)zero:(id)sender;
 - (IBAction)one:(id)sender;
@@ -25,18 +24,16 @@
 - (IBAction)seven:(id)sender;
 - (IBAction)eight:(id)sender;
 - (IBAction)nine:(id)sender;
-//max
-
 
 - (IBAction)clear:(id)sender;
 
-- (IBAction)divide:(id)sender;
-
-- (IBAction)multiply:(id)sender;
+- (IBAction)plus:(id)sender;
 
 - (IBAction)minus:(id)sender;
 
-- (IBAction)plus:(id)sender;
+- (IBAction)multiply:(id)sender;
+
+- (IBAction)divide:(id)sender;
 
 - (IBAction)equal:(id)sender;
 
@@ -44,5 +41,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *window;
 
+- (void)math:(int)kai;
+- (void)windowSetText:(int)selecter;
 
 @end

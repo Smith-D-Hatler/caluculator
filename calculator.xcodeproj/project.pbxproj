@@ -24,6 +24,7 @@
 		2BB756C6164B738800BAD53D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB7569E164B738300BAD53D /* Foundation.framework */; };
 		2BB756CE164B738800BAD53D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2BB756CC164B738800BAD53D /* InfoPlist.strings */; };
 		2BB756D1164B738800BAD53D /* calculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB756D0164B738800BAD53D /* calculatorTests.m */; };
+		2BEB49ED16B8DD4F009E7730 /* StateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BEB49EC16B8DD4F009E7730 /* StateMachine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		2BB756CD164B738800BAD53D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2BB756CF164B738800BAD53D /* calculatorTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = calculatorTests.h; sourceTree = "<group>"; };
 		2BB756D0164B738800BAD53D /* calculatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = calculatorTests.m; sourceTree = "<group>"; };
+		2BEB49EB16B8DD4F009E7730 /* StateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateMachine.h; sourceTree = "<group>"; };
+		2BEB49EC16B8DD4F009E7730 /* StateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateMachine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 				2BB756AC164B738300BAD53D /* AppDelegate.m */,
 				2BB756B4164B738500BAD53D /* MainStoryboard_iPhone.storyboard */,
 				2BB756B7164B738500BAD53D /* MainStoryboard_iPad.storyboard */,
+				2BEB49EB16B8DD4F009E7730 /* StateMachine.h */,
+				2BEB49EC16B8DD4F009E7730 /* StateMachine.m */,
 				2BB756BA164B738500BAD53D /* ViewController.h */,
 				2BB756BB164B738500BAD53D /* ViewController.m */,
 				2BB756A3164B738300BAD53D /* Supporting Files */,
@@ -277,6 +282,7 @@
 				2BB756A9164B738300BAD53D /* main.m in Sources */,
 				2BB756AD164B738300BAD53D /* AppDelegate.m in Sources */,
 				2BB756BC164B738500BAD53D /* ViewController.m in Sources */,
+				2BEB49ED16B8DD4F009E7730 /* StateMachine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
